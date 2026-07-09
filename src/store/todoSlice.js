@@ -31,15 +31,24 @@ const todoSlice = createSlice({
     setFilter: (state, action) => {
       state.filter = action.payload;
     },
-    // 🔥 THÊM CHỖ NÀY: Hàm xóa toàn bộ task đã hoàn thành
     clearCompleted: (state) => {
       state.items = state.items.filter((item) => !item.isCompleted);
       localStorage.setItem('todos', JSON.stringify(state.items));
     },
+
+    // 🔥 1. THÊM HÀM EDIT TODO VÀO ĐÂY NHA BỒ
+    editTodo: (state, action) => {
+      const { id, newText } = action.payload; // Nhận vào id và chữ mới từ component gửi lên
+      const todo = state.items.find((item) => item.id === id);
+      if (todo) {
+        todo.text = newText; // Cập nhật lại nội dung text
+      }
+      localStorage.setItem('todos', JSON.stringify(state.items)); // Lưu lại vào LocalStorage
+    },
   },
 });
 
-// 🔥 NHỚ THÊM 'clearCompleted' VÀO ĐÂY ĐỂ EXPORT RA NGOÀI NHA BỒ
-export const { addTodo, toggleTodo, deleteTodo, setFilter, clearCompleted } = todoSlice.actions;
+// 🔥 2. NHỚ THÊM 'editTodo' VÀO ĐÂY ĐỂ EXPORT RA CHO COMPONENT XÀI
+export const { addTodo, toggleTodo, deleteTodo, setFilter, clearCompleted, editTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;
