@@ -11,7 +11,7 @@ const todoSlice = createSlice({
   reducers: {
     addTodo: (state, action) => {
       state.items.push({
-        id: Date.now().toString(),
+        id: crypto.randomUUID(), // 🔥 Đã đổi sang UUID: An toàn tuyệt đối, không lo trùng ID
         text: action.payload,
         isCompleted: false,
       });
@@ -36,9 +36,9 @@ const todoSlice = createSlice({
       localStorage.setItem('todos', JSON.stringify(state.items));
     },
 
-    // 🔥 1. THÊM HÀM EDIT TODO VÀO ĐÂY NHA BỒ
+    // 🔥 Hàm edit Todo xịn mịn của bồ ở đây
     editTodo: (state, action) => {
-      const { id, newText } = action.payload; // Nhận vào id và chữ mới từ component gửi lên
+      const { id, newText } = action.payload; // Nhận vào { id, newText } từ component dispatch lên
       const todo = state.items.find((item) => item.id === id);
       if (todo) {
         todo.text = newText; // Cập nhật lại nội dung text
@@ -47,7 +47,6 @@ const todoSlice = createSlice({
     },
   },
 });
-
 
 export const { addTodo, toggleTodo, deleteTodo, setFilter, clearCompleted, editTodo } = todoSlice.actions;
 
