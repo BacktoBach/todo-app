@@ -48,7 +48,7 @@ const todoSlice = createSlice({
   },
 });
 
-// 🔥 2. NHỚ THÊM 'editTodo' VÀO ĐÂY ĐỂ EXPORT RA CHO COMPONENT XÀI
+
 export const { addTodo, toggleTodo, deleteTodo, setFilter, clearCompleted, editTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;

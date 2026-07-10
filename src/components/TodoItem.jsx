@@ -33,7 +33,8 @@ function TodoItem({ todo }) {
           type="checkbox"
           checked={todo.isCompleted}
           onChange={() => dispatch(toggleTodo(todo.id))}
-          className="w-5 h-5 rounded-full border-slate-300 text-indigo-500 focus:ring-indigo-500 cursor-pointer"
+          // Thêm appearance-none border-2 và chỉnh lại màu bg khi checked
+          className="w-5 h-5 appearance-none rounded-full border-2 border-slate-300 dark:border-zinc-600 checked:bg-indigo-500 checked:border-indigo-500 cursor-pointer transition-all flex items-center justify-center checked:after:content-['✓'] checked:after:text-white checked:after:text-xs checked:after:font-bold"
         />
 
         {/* 🔥 CHỖ THAY ĐỔI: HIỂN THỊ CHỮ HOẶC Ô INPUT TÙY TRẠNG THÁI */}
